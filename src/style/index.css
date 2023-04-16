@@ -10,12 +10,16 @@
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-    gap: 5vw;
+    gap: 20px;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     outline-style: solid;
     outline-color: #1b8aca;
+}
+
+.profile-pic-container {
+    margin-left: 5px;
 }
 
 .profile-pic {
@@ -29,6 +33,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 5px;
 }
 
 .about-me-text {
