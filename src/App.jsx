@@ -10,7 +10,7 @@ function App() {
       <div className='hello-card-container'>
         <div className='hello-card'>
           <div className='profile-pic-container'>
-            <img src='./profile_pic.jpg' className='profile-pic'></img>
+            <img src='/profile_pic.jpg' className='profile-pic'></img>
           </div>
 
           <div className='about-me-container'>
