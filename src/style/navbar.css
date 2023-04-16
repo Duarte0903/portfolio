@@ -1,7 +1,6 @@
 .navbar {
     background-color: #1b8aca;
     width: 100%;
-    position: fixed;
     min-height: 70px;
     display: flex;
     justify-content: space-between;
@@ -18,7 +17,7 @@
     margin-right: 5%;
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    gap: 20px;
     align-items: center;
     font-weight: bold;
     font-size: 1.2rem;
