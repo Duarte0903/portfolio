@@ -5,12 +5,12 @@ import '../src/style/index.css'
 function App() {
   return (
     <div className="App">
-      <Navbar></Navbar>
+      <Navbar />
       
       <div className='hello-card-container'>
         <div className='hello-card'>
           <div className='profile-pic-container'>
-            <img src='../assets/profile_pic.jpg' className='profile-pic'></img>
+            <img src={require('../public/profile_pic.jpg')} className='profile-pic' />
           </div>
 
           <div className='about-me-container'>
