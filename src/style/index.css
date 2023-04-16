@@ -6,8 +6,8 @@
 
 .hello-card {
     padding: 15px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -16,6 +16,8 @@
     border-radius: 20px;
     outline-style: solid;
     outline-color: #1b8aca;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000; 
+    box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000;
 }
 
 .profile-pic-container {
@@ -39,4 +41,35 @@
 .about-me-text {
     text-align: justify;
     width: 25vw;
+}
+
+.cv-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.download-cv-button {
+    background-color: #1b8aca;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 30px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.download-cv-button:hover {
+    transform: scale(1.05);
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000; 
+    box-shadow: 0px 10px 13px -7px #383838, 0px 0px 7px 6px #383838;
+}
+
+.languages-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

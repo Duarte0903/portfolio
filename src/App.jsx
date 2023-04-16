@@ -17,11 +17,19 @@ function App() {
             <h2>Hello there 👋</h2>
 
             <p className='about-me-text'>
-              My name is Duarte Leitão and I'm a 20 year old software engineering student
-              at the University of Minho.
+              My name is <span style={{fontWeight: 'bold'}}>Duarte Leitão</span> and I'm a 20 year old software 
+              engineering student at the University of Minho.
             </p>
           </div>
         </div>
+      </div>
+
+      <div className='cv-container'>
+          <div className='download-cv-button'>Download CV</div>
+      </div>
+
+      <div className='languages-container'>
+          <h1>Top Languages</h1>
       </div>
     </div>
   )
