@@ -1,0 +1,42 @@
+.project-card-container {
+    margin-bottom: 50px;
+    padding: 20px;
+    width: 350px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    outline-style: solid;
+    outline-color: #1b8aca;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000; 
+    box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000;
+}
+
+.top-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.project-name {
+    text-align: left;
+    font-size: 20px;
+}
+
+.link-button {
+    background-color: #1b8aca;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    text-align: center;
+    padding: 5px;
+}
+
+.link-button:hover {
+    transform: scale(1.05);
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000; 
+    box-shadow: 0px 10px 13px -7px #383838, 0px 0px 7px 6px #383838;
+}
