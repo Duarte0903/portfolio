@@ -3,8 +3,8 @@ import '../style/navbar.css'
 function Navbar() {
   return (
     <div className='navbar'>
-        <a className='nav-branding' href=''>
-            <h1>Duarte Leitão</h1>
+        <a className='nav-branding' href='index.html'>
+            <h1>&lt; D L /&gt;</h1>
         </a>
 
         <ul className='nav-links'>

@@ -39,8 +39,9 @@ function App() {
 
           <div className='language-cards-container'>
             <LanguageCard imagePath='c_logo.png'
-                          bp1='Estruras de dados'
-                          bp2='loops'/>
+                          bp1='Data Structures'
+                          bp2='loops'
+                          bp3='Dynamic Memory Management'/>
 
             <LanguageCard imagePath='js_logo.png'
                           bp1='DOM manipulation'
@@ -58,7 +59,14 @@ function App() {
           <ProjectCard project_name='FSUMinho Website'
                        repo_link='https://github.com/FSUMinho/website'
                        project_description="Website for FSUMinho Formula Student Team.
-                                            Made with HTML, CSS and Javascript."/>
+                                            Made with HTML, CSS and Javascript. Responsive elements,
+                                            e-mail contact form and multi-language support"/>
+
+          <ProjectCard project_name='Personal Web Portfolio'
+                       repo_link='https://github.com/Duarte0903/portfolio'
+                       project_description='Personal web portfolio made with React and Vite. 
+                       My first contact with the framework. Code recycling with components. 
+                       Build and deployment automated with GitHub Actions'/>
         </div>
       </div>
     </div>

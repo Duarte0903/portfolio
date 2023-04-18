@@ -10,11 +10,13 @@ function ProjectCard(props) {
             <div className='top-row'>
                 <h4 className='project-name'>{props.project_name}</h4>
 
-                <a className='link-button' href={props.repo_link}>Link</a>
+                <div className='link-button'>
+                    <a href={props.repo_link}>Link</a>
+                </div>
             </div>
 
             <div className='project-description'>
-                <p>{props.project_description}</p>
+                <p className='project-description'>{props.project_description}</p>
             </div>
         </div>
     );
