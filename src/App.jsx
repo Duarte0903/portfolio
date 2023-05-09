@@ -1,14 +1,18 @@
 import Navbar from './components/navbar.jsx'
 import '../src/style/general.css'
 import '../src/style/index.css'
-import LanguageCard from './components/language_card.jsx'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProjectCard from './components/project_card.jsx';
+import '../src/functions/age_calculator.js'
+import { age_calculator } from '../src/functions/age_calculator.js'
 
 AOS.init();
 
 function App() {
+
+  const my_age = age_calculator();
+
   return (
     <div className="App">
       <Navbar />
@@ -20,11 +24,11 @@ function App() {
           </div>
 
           <div className='about-me-container'>
-            <h2>Hello there 👋</h2>
+            <h2>Hello there 👋</h2>;
 
             <p className='about-me-text'>
-              My name is <span style={{fontWeight: 'bold'}}>Duarte Leitão</span> and I'm a 20 year old software 
-              engineering student at the University of Minho.
+              My name is <span style={{fontWeight: 'bold'}}>Duarte Leitão</span> and I'm a <span dangerouslySetInnerHTML={{__html: my_age}}/>
+              year old software engineering student at the University of Minho.
             </p>
           </div>
         </div>
@@ -37,18 +41,12 @@ function App() {
       <div className='languages-container'>
           <h1>Top Languages</h1>
 
-          <div className='language-cards-container'>
-            <LanguageCard imagePath='c_logo.png'
-                          bp1='Data Structures'
-                          bp2='loops'
-                          bp3='Dynamic Memory Management'/>
-
-            <LanguageCard imagePath='js_logo.png'
-                          bp1='DOM manipulation'
-                          bp2=''/>
-
-            <LanguageCard imagePath='java_logo.png'
-                          bp1=''/>
+          <div className='language-logos-container'>
+            <img className='language-logo' src='c_logo.png'/>
+            <img className='language-logo' src='js_logo.png'/>
+            <img className='language-logo' src='java_logo.png'/>
+            <img className='language-logo' src='haskell_logo.png'/>
+            <img className='language-logo' src='python_logo.png'/>
           </div>
       </div>
 

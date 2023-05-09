@@ -74,13 +74,18 @@
     align-items: center;
 }
 
-.language-cards-container {
+.language-logos-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 50px;
+    justify-content: center;
+    gap: 100px;
     align-items: center;
     margin-bottom: 50px;
+}
+
+.language-logo {
+    height: 100px;
+    width: auto;
 }
 
 .top-projects-container {
