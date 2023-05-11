@@ -4,7 +4,6 @@ import '../src/style/index.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProjectCard from './components/project_card.jsx';
-import '../src/functions/age_calculator.js'
 import { age_calculator } from '../src/functions/age_calculator.js'
 
 AOS.init();
@@ -14,7 +13,7 @@ function App() {
   const my_age = age_calculator();
 
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar />
       
       <div className='hello-card-container' data-aos='fade'>
@@ -24,7 +23,7 @@ function App() {
           </div>
 
           <div className='about-me-container'>
-            <h2>Hello there 👋</h2>;
+            <h2>Hello there 👋</h2>
 
             <p className='about-me-text'>
               My name is <span style={{fontWeight: 'bold'}}>Duarte Leitão</span> and I'm a <span dangerouslySetInnerHTML={{__html: my_age}}/>
@@ -42,11 +41,11 @@ function App() {
           <h1>Top Languages</h1>
 
           <div className='language-logos-container'>
-            <img className='language-logo' src='c_logo.png'/>
-            <img className='language-logo' src='js_logo.png'/>
-            <img className='language-logo' src='java_logo.png'/>
-            <img className='language-logo' src='haskell_logo.png'/>
-            <img className='language-logo' src='python_logo.png'/>
+            <img className='language-logo' src='c_logo.png' alt='C'/>
+            <img className='language-logo' src='js_logo.png' alt='JavaScript'/>
+            <img className='language-logo' src='java_logo.png' alt='Java'/>
+            <img className='language-logo' src='haskell_logo.png' alt='Haskell'/>
+            <img className='language-logo' src='python_logo.png' alt='Python'/>
           </div>
       </div>
 

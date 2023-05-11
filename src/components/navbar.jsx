@@ -8,6 +8,12 @@ function Navbar() {
         </a>
 
         <ul className='nav-links'>
+            <li>
+                <div className='dark-mode-switch'>
+                    <div className='switch-indicator'/>
+                </div>
+            </li>
+
             <li className='nav-item'>
                 <a href='https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/'>Linkedin</a>
             </li>
