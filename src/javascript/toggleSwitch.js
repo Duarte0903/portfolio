@@ -6,6 +6,6 @@ export function toggleSwitch (theme) {
     }
 
     if (theme === 'light') {
-        themeSwitch.style.setProperty('--margin-left', '33px');
+        themeSwitch.style.setProperty('--margin-left', '16px');
     }
 }

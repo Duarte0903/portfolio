@@ -75,17 +75,18 @@
 }
 
 .language-logos-container {
+    width: 80%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    gap: 100px;
+    gap: 80px;
     align-items: center;
     margin-bottom: 50px;
 }
 
 .language-logo {
     height: 100px;
-    width: auto;
 }
 
 .top-projects-container {
@@ -101,4 +102,23 @@
     justify-content: space-between;
     gap: 50px;
     align-items: center;
+}
+
+@media (max-width: 800px) {
+    .hello-card {
+        flex-direction: column;
+    }
+
+    .about-me-text {
+        width: 80vw;
+    }
+
+    .language-logo {
+        height: 70px;
+    }
+
+    .project-cards-container {
+        flex-direction: column;
+        gap: 50px;
+    }
 }

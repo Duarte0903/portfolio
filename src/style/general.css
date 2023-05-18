@@ -57,9 +57,13 @@ h1, h2, h4 {
 #dark {
     background-color: #242424;
     --text-color: white;
+    --moon-display: block;
+    --sun-display: none;
 }
 
 #light {
     background-color: white;
     --text-color: black;
+    --sun-display: block;
+    --moon-display: none;
 }

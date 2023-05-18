@@ -16,6 +16,7 @@
 .logo {
     font-size: 32px;
     font-weight: 700;
+    z-index: 99999992;
 }
 
 .nav-links {
@@ -28,22 +29,14 @@
     font-size: 1.2rem;
 }
 
-.nav-item {
-    cursor: pointer;
-    transition: all .1s ease-in-out;
-}
-
-.nav-item:hover {
-    transform: scale(1.05);
-}
-
 .dark-mode-switch {
     cursor: pointer;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 20px;
     height: 30px;
     width: 60px;
     display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -54,4 +47,80 @@
     width: 25px;
     margin-left: var(--margin-left);
     transition: all .1s ease-in-out;
+}
+
+.switch-icon {
+    height: auto;
+    width: 15px;
+    opacity: 60%;
+}
+
+.moon {
+    margin-left: 14px;
+    display: var(--moon-display);
+}
+
+.sun {
+    margin-left: 3px;
+    display: var(--sun-display);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    margin-right: 5%;
+    z-index: 99999992;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+@media (max-width: 800px) {
+    .hamburger {
+        display: block;
+    }
+  
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+  
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+  
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-links {
+        position: fixed;
+        top: -200%;
+        gap: 0;
+        flex-direction: column;
+        background-color: #1b8aca;
+        width: 100%;
+        text-align: center;
+        transition: .5s;
+        padding: 10px;
+        z-index: 99999;
+    }
+
+    .nav-item {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+  
+    .nav-links.active {
+        left: 0;
+        top: 50px;
+    }
 }

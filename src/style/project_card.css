@@ -51,3 +51,11 @@
 .project-description {
     text-align: justify;
 }
+
+@media (max-width: 800px) {
+    .project-card-container {
+        width: 260px;
+        height: 200px;
+        font-size: 85%;
+    }
+}
