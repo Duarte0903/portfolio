@@ -52,16 +52,16 @@
 .switch-icon {
     height: auto;
     width: 15px;
-    opacity: 60%;
 }
 
 .moon {
-    margin-left: 14px;
+    margin-left: 11px;
     display: var(--moon-display);
+    opacity: 60%;
 }
 
 .sun {
-    margin-left: 3px;
+    margin-left: 5px;
     display: var(--sun-display);
 }
 

@@ -117,8 +117,12 @@
         height: 70px;
     }
 
+    .language-logos-container {
+        gap: 50px;
+    }
+
     .project-cards-container {
         flex-direction: column;
-        gap: 50px;
+        gap: 15px;
     }
 }

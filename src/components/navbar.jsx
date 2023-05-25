@@ -2,7 +2,7 @@ import '../style/navbar.css'
 
 function Navbar({ toggleTheme }) {
   return (
-    <div className='navbar'>
+    <header className='navbar'>
         <a className='nav-branding' href='index.html'>
             <div className='logo'>&lt; D L /&gt;</div>
         </a>
@@ -30,7 +30,7 @@ function Navbar({ toggleTheme }) {
             <span className='bar'/>
             <span className='bar'/>
         </div>
-    </div>
+    </header>
   );
 }
 
