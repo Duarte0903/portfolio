@@ -1,13 +1,21 @@
+import React, { useState } from 'react';
 import '../style/navbar.css'
 
 function Navbar({ toggleTheme }) {
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
+    const menuHandler = () => {
+        if (isMenuOpen) setMenuOpen(false);
+        else setMenuOpen(true);
+    }
+
   return (
-    <header className='navbar'>
+    <header className={`navbar ${isMenuOpen ? 'active' : ''}`}>
         <a className='nav-branding' href='index.html'>
             <div className='logo'>&lt; D L /&gt;</div>
         </a>
 
-        <ul className='nav-links'>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
             <li className='nav-item'>
                 <div className='dark-mode-switch' onClick={toggleTheme}>
                     <img src='sun.png' className='switch-icon sun'/>
@@ -25,7 +33,7 @@ function Navbar({ toggleTheme }) {
             </li>
         </ul>
 
-        <div className='hamburger'>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={menuHandler}>
             <span className='bar'/>
             <span className='bar'/>
             <span className='bar'/>
