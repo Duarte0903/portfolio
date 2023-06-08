@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import '../style/navbar.css'
 
 function Navbar({ toggleTheme }) {
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
 
     const menuHandler = () => {
-        if (isMenuOpen) setMenuOpen(false);
-        else setMenuOpen(true);
+        setMenuOpen(!isMenuOpen);
     }
 
+    const handleOutsideClick = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+          setMenuOpen(false);
+        }
+      };
+
+      useEffect(() => {
+        document.addEventListener('click', handleOutsideClick);
+    
+        return () => {
+          document.removeEventListener('click', handleOutsideClick);
+        };
+      }, []);
+
   return (
-    <header className={`navbar ${isMenuOpen ? 'active' : ''}`}>
+    <header className={`navbar ${isMenuOpen ? 'active' : ''}`} ref={menuRef}>
         <a className='nav-branding' href='index.html'>
             <div className='logo'>&lt; D L /&gt;</div>
         </a>

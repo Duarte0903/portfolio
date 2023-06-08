@@ -18,13 +18,9 @@ function App() {
   
   const [theme, setTheme] = useState('dark');
   const toggleTheme = () => {
-    if (theme === 'dark') {
-      setTheme('light');
-      toggleSwitch('light');
-    } else {
-      setTheme('dark');
-      toggleSwitch('dark');
-    }
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    toggleSwitch(newTheme);
   };
 
   return (
@@ -32,7 +28,7 @@ function App() {
       <div className='App' id={theme}>
         <Navbar toggleTheme={toggleTheme}/>
         
-        <div className='hello-card-container' data-aos='fade'>
+        <div className='hello-card-container'>
           <div className='hello-card'>
             <div className='profile-pic-container'>
               <img src="profile_pic.jpg" className='profile-pic' />
