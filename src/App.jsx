@@ -76,6 +76,11 @@ function App() {
                         project_description='Personal web portfolio made with React and Vite. 
                         My first contact with the framework. Code recycling with components. 
                         Build and deployment automated with GitHub Actions'/>
+
+            <ProjectCard project_name='Online Auctions'
+                         repo_link='https://github.com/Pedrosilva03/li4-online-auctions'
+                         project_description='University project made with Blazor. Online auctions
+                         platform for Counter-Strike skins. Uses MS SQL server for the data layer.'/>
           </div>
         </div>
       </div>
