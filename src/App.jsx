@@ -6,7 +6,8 @@ import 'aos/dist/aos.css';
 import ProjectCard from './components/project_card.jsx';
 import { age_calculator } from './javascript/age_calculator.js'
 import { createContext, useState } from 'react';
-import { toggleSwitch } from '../src/javascript/toggleSwitch.js'
+import { toggleSwitch } from '../src/javascript/toggleSwitch.js';
+import { getgit } from '../src/javascript/download_cv.js';
 
 export const ThemeContext = createContext(null);
 
@@ -22,6 +23,19 @@ function App() {
     setTheme(newTheme);
     toggleSwitch(newTheme);
   };
+
+  const owner = 'Duarte0903';
+    const repo = 'resume';
+    const filePath = 'template/resume.pdf';
+
+    const handleDownload = async () => {
+        try {
+            await getgit(owner, repo, filePath);
+            console.log('File downloaded successfully');
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
+    };
 
   return (
     <ThemeContext.Provider value={{theme, toggleTheme}}>
@@ -46,7 +60,7 @@ function App() {
         </div>
 
         <div className='cv-container'>
-            <div className='download-cv-button'>Download CV</div>
+            <div className='download-cv-button' onClick={handleDownload}>Download CV</div>
         </div>
 
         <div className='languages-container'>
