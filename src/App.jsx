@@ -137,7 +137,7 @@ function App() {
                   direction: 'row',
                   position: {
                     vertical: 'bottom',
-                    horizontal: 'center',
+                    horizontal: 'middle',
                   },
                   labelStyle: {
                     fill: fillColor,
