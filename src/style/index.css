@@ -1,7 +1,8 @@
 .hello-card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
 }
 
 .hello-card {
@@ -43,50 +44,21 @@
     width: 25vw;
 }
 
-.cv-container {
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.download-cv-button {
-    background-color: #1b8aca;
-    font-weight: bold;
-    border-radius: 20px;
-    font-size: 30px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-}
-
-.download-cv-button:hover {
-    transform: scale(1.05);
-    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000; 
-    box-shadow: 0px 10px 13px -7px #383838, 0px 0px 7px 6px #383838;
-}
-
 .languages-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.language-logos-container {
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    gap: 80px;
-    align-items: center;
     margin-bottom: 50px;
 }
 
-.language-logo {
-    height: 100px;
+.pie-chart-container {
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .top-projects-container {
@@ -100,9 +72,47 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 50px;
+    justify-content: center;
+    gap: 30px;
     align-items: center;
+}
+
+.education-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.education-cards-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+}
+
+.edu-institution {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.edu-icon {
+    height: 20px;
+    width: auto;
+}
+
+.education-card {
+    border-radius: 20px;
+    outline-style: solid;
+    outline-color: #1b8aca;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000; 
+    box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 6px #000000;
+    padding: 15px;
 }
 
 @media (max-width: 800px) {

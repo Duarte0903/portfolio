@@ -1,4 +1,4 @@
-import "../style/project_card.css"
+import "./project_card.css"
 
 function ProjectCard(props) {
     const {project_name, 
@@ -10,9 +10,9 @@ function ProjectCard(props) {
             <div className='top-row'>
                 <h4 className='project-name'>{props.project_name}</h4>
 
-                <div className='link-button'>
-                    <a href={props.repo_link}>Link</a>
-                </div>
+                <a className='link-button' href={props.repo_link}>
+                    <img src="github.png" className="card-icon" />
+                </a>
             </div>
 
             <div className='project-description'>

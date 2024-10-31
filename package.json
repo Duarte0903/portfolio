@@ -9,12 +9,20 @@
     "preview": "vite preview --port 8080"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.1.0",
+    "@mui/material": "^6.1.6",
+    "@mui/styled-engine-sc": "^6.1.6",
+    "@mui/x-charts": "^7.22.0",
     "aos": "^3.0.0-beta.6",
     "dotenv": "^16.4.5",
     "gh-pages": "^5.0.0",
+    "gh-polyglot": "^2.3.3",
     "i18next": "^22.4.14",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
