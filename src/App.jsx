@@ -17,10 +17,10 @@ function App() {
   const my_age = age_calculator();
   
   const [theme, setTheme] = useState('dark');
-  const [languageData, setLanguageData] = useState([]);
+  const [languageData, setLanguageData] = useState(null);
 
   // Language data for the PieChart
-  const fillColor = theme === 'dark' ? 'white' : 'black'
+  const fillColor = theme === 'dark' ? 'white' : 'black';
   const IGNORE_LANGUAGES = ['Pug', 'Roff', 'CMake', 'Shell', 'Nix'];
 
   const toggleTheme = () => {
@@ -114,37 +114,41 @@ function App() {
           <h1>Top Languages</h1>
 
           <div className='pie-chart-container'>
-            <PieChart
-              className="pie-chart" 
-              margin={{ bottom: 100, right: 0, left: 0, top: 0 }}
-              series={[
-                {
-                  data: languageData,
-                  highlightScope: { fade: 'global', highlight: 'item' },
-                  faded: { innerRadius: 30, additionalRadius: -30, color: 'grey' },
-                  label: {
-                    position: 'outside',
-                    color: 'grey',
-                    fontSize: '12px',
-                  }
-                },
-              ]}
-              height={400}
-              width={600}
-              slotProps={{
-                legend: {
-                  itemMarkWidth: 10,
-                  direction: 'row',
-                  position: {
-                    vertical: 'bottom',
-                    horizontal: 'middle',
+            {languageData ? (
+              <PieChart
+                className="pie-chart" 
+                margin={{ bottom: 100, right: 0, left: 0, top: 0 }}
+                series={[
+                  {
+                    data: languageData,
+                    highlightScope: { fade: 'global', highlight: 'item' },
+                    faded: { innerRadius: 30, additionalRadius: -30, color: 'grey' },
+                    label: {
+                      position: 'outside',
+                      color: 'grey',
+                      fontSize: '12px',
+                    }
                   },
-                  labelStyle: {
-                    fill: fillColor,
+                ]}
+                height={400}
+                width={600}
+                slotProps={{
+                  legend: {
+                    itemMarkWidth: 10,
+                    direction: 'row',
+                    position: {
+                      vertical: 'bottom',
+                      horizontal: 'middle',
+                    },
+                    labelStyle: {
+                      fill: fillColor,
+                    }
                   }
-                }
-              }}
-            />
+                }}
+              />
+            ) : (
+              <div className="spinner"></div>
+            )}
           </div>
         </div>
 
