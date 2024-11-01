@@ -58,7 +58,7 @@ function App() {
       
       const pieChartData = Object.entries(languageCounts).map(([lang, count], index) => ({
         id: index, 
-        value: (count / totalBytes) * 100, 
+        value: ((count / totalBytes) * 100).toFixed(2), 
         label: lang 
       }));
   
