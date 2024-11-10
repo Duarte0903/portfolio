@@ -144,26 +144,32 @@ header {
 
     .nav-links {
         position: fixed;
-        top: -200%;
+        top: -100%;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
         gap: 0;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         background-color: #1b8aca;
-        width: 100%;
+        border-radius: 40px;
         text-align: center;
-        transition: .5s;
-        padding: 10px;
-        z-index: 99999;
+        transition: top 0.8s, opacity 0.8s;
+        width: 70%;
+        opacity: 0;
     }
 
     .nav-item {
         margin: 10px 0;
         display: flex;
-        flex-direction: row;
+        justify-content: center;
         align-items: center;
+        width: 100%;
     }
   
     .nav-links.active {
-        left: 0;
-        top: 50px;
+        top: 80px;
+        opacity: 1;
     }
 }
