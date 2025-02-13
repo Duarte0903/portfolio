@@ -19,6 +19,8 @@
 
 **2.** Create a `.env` file with the necessary keys
 
+**4.** Update `data.json` with your information
+
 **3.** Running the dev preview:
 ```shell
 npm run dev

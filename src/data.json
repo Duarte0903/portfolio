@@ -1,0 +1,57 @@
+{
+    "hello-card": {
+        "text": "My name is Duarte Leitão and I'm a 21 year old software engineering student at the University of Minho."
+    },
+
+    "github_name": "Duarte0903",
+
+    "github_profile": "",
+
+    "linkedin": "https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/",
+
+    "education": [
+        {
+            "title": "BSc in Software Engineering",
+            "school": "University of Minho",
+            "date": "2021 - 2024"
+        },
+
+        {
+            "title": "MSc in Software Engineering",
+            "school": "University of Minho",
+            "date": "2024 - Present"
+        }
+    ],
+
+    "projects" : [
+        {
+            "title": "FSUMinho Website",
+            "link": "https://github.com/FSUMinho/website_v2",
+            "description": "Website for FSUMinho Formula Student Team. Made with React and Vite. Responsive elements, e-mail contact form and multi-language support."
+        },
+
+        {
+            "title": "Online Auctions",
+            "link": "https://github.com/Pedrosilva03/li4-online-auctions",
+            "description": "University project made with Blazor. Online auctions platform for Counter-Strike skins. Uses MS SQL server for the data layer."
+        },
+
+        {
+            "title": "Subject webpages platform",
+            "link": "https://github.com/Duarte0903/EngWeb2024-Projeto",
+            "description": "Platform that allows the creation of webpages for uni subjects for professors to post related content and for students to access it. Made with Express.js and MongoDB."
+        },
+
+        {
+            "title": "Streaming Service",
+            "link": "https://github.com/Duarte0903/ESR_UMinho",
+            "description": "University project made to explore streaming via the RTP protocol. Supports multiple video sources and clients. There are also basic metrics that determine the path the packets take in the network."
+        },
+
+        {
+            "title": "Online Image Editor",
+            "link": "https://github.com/Duarte0903/RAS_UMinho",
+            "description": "University project made to put in practice software architecture concepts. This tool follows the microservices architecture. Frontend made with React and backend with Python and RabbitMQ."
+        }
+    ]
+}
