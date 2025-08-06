@@ -26,7 +26,7 @@ function Navbar({ toggleTheme }) {
 
       const owner = 'Duarte0903';
       const repo = 'resume';
-      const filePath = 'template/resume.pdf';
+      const filePath = 'template/resume_pt.pdf';
   
       const handleDownload = async () => {
           try {
