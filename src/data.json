@@ -1,25 +1,75 @@
 {
-    "hello-card": {
-        "text": "My name is Duarte Leitão and I'm a 21 year old software engineering student at the University of Minho."
+    "hero": {
+        "greeting": "Hi, I'm",
+        "name": "Duarte Leitão",
+        "role": "Software Engineering Student & Developer",
+        "tagline": "MSc Software Engineering student at the University of Minho. I build full-stack web apps and love digging into systems — from microservices to network protocols."
     },
+
+    "hello-card": {
+        "text": "I'm Duarte Leitão, a 23-year-old software engineering student based in Portugal. I enjoy turning ideas into clean, reliable software — building for the web, exploring distributed systems, and learning something new with every project. When I'm not studying, you'll usually find me shipping side projects or contributing to my Formula Student team."
+    },
+
+    "facts": [
+        { "label": "Based in", "value": "Braga, Portugal" },
+        { "label": "Focus", "value": "Full-stack & Systems" },
+        { "label": "Currently", "value": "MSc @ U. Minho" }
+    ],
 
     "github_name": "Duarte0903",
 
-    "github_profile": "",
+    "github_profile": "https://github.com/Duarte0903",
 
     "linkedin": "https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/",
 
-    "education": [
+    "skills": [
         {
-            "title": "BSc in Software Engineering",
-            "school": "University of Minho",
-            "date": "2021 - 2024"
+            "category": "Languages",
+            "items": ["Python", "Java", "JavaScript", "C", "Haskell"]
+        },
+        {
+            "category": "Frameworks",
+            "items": ["React", "Vite", "Node.js", "Express", "Blazor", "Guidewire"]
+        },
+        {
+            "category": "Tools & Data",
+            "items": ["MongoDB", "MS SQL", "RabbitMQ", "Docker", "Git"]
+        }
+    ],
+
+    "experience": [
+        {
+            "role": "Summer Intern",
+            "company": "Deloitte",
+            "brandColor": "#86BC25",
+            "type": "Internship",
+            "date": "Summer 2025",
+            "location": "Braga, Portugal",
+            "description": "Development of agentic tools to provide assistance in the process of requirement elaboration."
         },
 
+        {
+            "role": "Trainee",
+            "company": "Deloitte",
+            "brandColor": "#86BC25",
+            "type": "Internship",
+            "date": "2025 - 2026",
+            "location": "Braga, Portugal",
+            "description": "Development in Guidewire Claimcenter and Policycenter. Introduction of new LoBs and insurance products."
+        }
+    ],
+
+    "education": [
         {
             "title": "MSc in Software Engineering",
             "school": "University of Minho",
             "date": "2024 - Present"
+        },
+
+        {
+            "title": "BSc in Software Engineering",
+            "school": "University of Minho",
+            "date": "2021 - 2024"
         }
     ],
 

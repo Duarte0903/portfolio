@@ -2,6 +2,14 @@ import { React, useState, useEffect, useRef } from 'react';
 import { getgit } from '../../javascript/download_cv.js';
 import './navbar.css'
 
+const NAV_LINKS = [
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Education', href: '#education' },
+    { label: 'Projects', href: '#projects' },
+];
+
 function Navbar({ toggleTheme }) {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
@@ -9,6 +17,8 @@ function Navbar({ toggleTheme }) {
     const menuHandler = () => {
         setMenuOpen(!isMenuOpen);
     }
+
+    const closeMenu = () => setMenuOpen(false);
 
     const handleOutsideClick = (event) => {
         if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -18,16 +28,22 @@ function Navbar({ toggleTheme }) {
 
       useEffect(() => {
         document.addEventListener('click', handleOutsideClick);
-    
+
         return () => {
           document.removeEventListener('click', handleOutsideClick);
         };
       }, []);
 
+      const scrollToTop = (event) => {
+          event.preventDefault();
+          closeMenu();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
       const owner = 'Duarte0903';
       const repo = 'resume';
       const filePath = 'template/resume_pt.pdf';
-  
+
       const handleDownload = async () => {
           try {
               await getgit(owner, repo, filePath);
@@ -40,35 +56,39 @@ function Navbar({ toggleTheme }) {
   return (
     <div className='nav-container'>
         <header className={`navbar ${isMenuOpen ? 'active' : ''}`} ref={menuRef}>
-            <a className='nav-branding' href='index.html'>
-                <div className='logo'>&lt; D L /&gt;</div>
+            <a className='nav-branding' href='#' onClick={scrollToTop}>
+                <div className='logo'>&lt; DL /&gt;</div>
             </a>
 
-            <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-                <li className='nav-item'>
+            <nav className={`nav-collapse ${isMenuOpen ? 'active' : ''}`}>
+                <ul className='nav-links'>
+                    {NAV_LINKS.map((link) => (
+                        <li className='nav-item' key={link.href}>
+                            <a className='nav-link' href={link.href} onClick={closeMenu}>{link.label}</a>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className='nav-actions'>
                     <div className='dark-mode-switch' onClick={toggleTheme}>
                         <img src='sun.png' className='switch-icon sun'/>
                         <div className='switch-indicator' id='switch'/>
                         <img src='moon.png' className='switch-icon moon'/>
                     </div>
-                </li>
 
-                <li className='nav-item nav-link'>
-                    <a href='https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/'>
-                        <img src='linkedin.png' className='nav-icon' />
+                    <a className='nav-action' href='https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/' target='_blank' rel='noreferrer' aria-label='LinkedIn'>
+                        <img src='linkedin.png' className='nav-icon' alt='' />
                     </a>
-                </li>
 
-                <li className='nav-item nav-link'>
-                    <a href='https://github.com/Duarte0903'>
-                        <img src='github.png' className='nav-icon' />
+                    <a className='nav-action' href='https://github.com/Duarte0903' target='_blank' rel='noreferrer' aria-label='GitHub'>
+                        <img src='github.png' className='nav-icon' alt='' />
                     </a>
-                </li>
 
-                <li className='nav-item nav-link'>
-                    <img className='nav-icon' onClick={handleDownload} src='cv.png' />
-                </li>
-            </ul>
+                    <button className='nav-action' onClick={handleDownload} aria-label='Download CV'>
+                        <img className='nav-icon' src='cv.png' alt='' />
+                    </button>
+                </div>
+            </nav>
 
             <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={menuHandler}>
                 <span className='bar'/>

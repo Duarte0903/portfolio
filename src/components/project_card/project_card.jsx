@@ -8,16 +8,14 @@ function ProjectCard(props) {
     return(
         <div className='project-card-container'>
             <div className='top-row'>
-                <h4 className='project-name'>{props.project_name}</h4>
+                <h4 className='project-name'>{project_name}</h4>
 
-                <a className='link-button' href={props.repo_link}>
-                    <img src="github.png" className="card-icon" />
+                <a className='link-button' href={repo_link} target="_blank" rel="noreferrer" aria-label={`${project_name} on GitHub`}>
+                    <img src="github.png" className="card-icon" alt="" />
                 </a>
             </div>
 
-            <div className='project-description'>
-                <p className='project-description'>{props.project_description}</p>
-            </div>
+            <p className='project-description'>{project_description}</p>
         </div>
     );
 }

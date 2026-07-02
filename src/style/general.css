@@ -1,19 +1,33 @@
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
+    --font-body: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-  
+    line-height: 1.6;
+    font-weight: 400;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 
+    /* Brand */
+    --accent-1: #7c3aed;
+    --accent-2: #22d3ee;
+    --accent-grad: linear-gradient(135deg, #7c3aed 0%, #2dd4ff 100%);
+
+    /* Shape */
+    --radius: 18px;
+    --radius-lg: 26px;
+    --radius-pill: 999px;
+    --maxw: 1120px;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    /* used by the theme toggle indicator */
     --margin-left: 2px;
+}
+
+html {
+    background-color: #0a0a12;
 }
 
 html, body {
@@ -21,7 +35,14 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    margin-bottom: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
 }
 
 a {
@@ -33,37 +54,209 @@ li {
 }
 
 p {
-    color: var(--text-color);
+    color: var(--text-dim);
+    margin: 0;
 }
 
-h1, h2, h4 {
-    color: var(--text-color);
+h1, h2, h3, h4 {
+    color: var(--text);
+    font-family: var(--font-display);
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
 }
 
-*::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  *::-webkit-scrollbar-track {
-    background: white
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    background-color: #818181;
-    border-radius: 20px;
-    border: 3px solid #818181;
-}
+/* ---------- Theme tokens ---------- */
 
 #dark {
-    background-color: #242424;
-    --text-color: white;
+    --bg: #0a0a12;
+    --surface: rgba(255, 255, 255, 0.035);
+    --surface-strong: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(255, 255, 255, 0.22);
+    --text: #f3f4f8;
+    --text-dim: #a6a7b8;
+    --shadow: 0 24px 60px -22px rgba(0, 0, 0, 0.75);
+    --nav-bg: rgba(12, 12, 20, 0.55);
+    --chip-bg: rgba(255, 255, 255, 0.04);
+
+    background-color: var(--bg);
+    color: var(--text);
     --moon-display: block;
     --sun-display: none;
 }
 
 #light {
-    background-color: white;
-    --text-color: black;
+    --bg: #f6f7fc;
+    --surface: rgba(255, 255, 255, 0.85);
+    --surface-strong: #ffffff;
+    --border: rgba(17, 18, 40, 0.09);
+    --border-hover: rgba(124, 58, 237, 0.45);
+    --text: #101127;
+    --text-dim: #55566d;
+    --shadow: 0 24px 60px -26px rgba(30, 30, 70, 0.28);
+    --nav-bg: rgba(255, 255, 255, 0.6);
+    --chip-bg: rgba(17, 18, 40, 0.035);
+
+    background-color: var(--bg);
+    color: var(--text);
     --sun-display: block;
     --moon-display: none;
+}
+
+/* ---------- App shell + ambient background ---------- */
+
+.App {
+    position: relative;
+    min-height: 100vh;
+    isolation: isolate;
+    padding-bottom: 40px;
+}
+
+.App::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(42% 46% at 14% 8%, rgba(124, 58, 237, 0.20), transparent 62%),
+        radial-gradient(40% 44% at 88% 16%, rgba(34, 211, 238, 0.16), transparent 60%),
+        radial-gradient(52% 48% at 52% 108%, rgba(124, 58, 237, 0.12), transparent 60%);
+}
+
+#light .App::before {
+    opacity: 0.7;
+}
+
+/* ---------- Layout helpers ---------- */
+
+.section {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 84px 24px;
+    scroll-margin-top: 70px;
+}
+
+.section-head {
+    text-align: center;
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-kicker {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+}
+
+.section-title {
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    font-weight: 700;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin: 16px auto 0;
+    border-radius: 999px;
+    background: var(--accent-grad);
+}
+
+.gradient-text {
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* ---------- Surfaces (cards) ---------- */
+
+.surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.surface:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.98rem;
+    padding: 13px 26px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.btn-primary {
+    background: var(--accent-grad);
+    color: #ffffff;
+    box-shadow: 0 12px 30px -12px rgba(124, 58, 237, 0.7);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -12px rgba(124, 58, 237, 0.85);
+}
+
+.btn-ghost {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-hover);
+}
+
+/* ---------- Icon theming ---------- */
+/* GitHub / LinkedIn / CV glyphs are white PNGs — they read fine on the dark
+   theme, but need to be darkened on the light theme to stay visible. Scoped to
+   the navbar and social buttons so the white icon on the project-card gradient
+   circle (.card-icon) is left untouched. */
+#light .nav-icon,
+#light .social-link img {
+    filter: brightness(0) opacity(0.8);
+}
+
+/* ---------- Scrollbar ---------- */
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--accent-grad);
+    border-radius: 20px;
 }

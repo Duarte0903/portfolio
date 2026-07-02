@@ -6,20 +6,17 @@ import 'aos/dist/aos.css';
 import ProjectCard from './components/project_card/project_card.jsx';
 import { createContext, useState, useEffect } from 'react';
 import { toggleSwitch } from '../src/javascript/toggleSwitch.js';
-import { PieChart } from '@mui/x-charts/PieChart';
+import { getgit } from './javascript/download_cv.js';
 import data from './data.json';
 
 export const ThemeContext = createContext(null);
 
-AOS.init();
-
 function App() {
   const [theme, setTheme] = useState('dark');
-  const [languageData, setLanguageData] = useState(null);
 
-  // Language data for the PieChart
-  const fillColor = theme === 'dark' ? 'white' : 'black';
-  const IGNORE_LANGUAGES = ['Pug', 'Roff', 'CMake', 'Shell', 'Nix'];
+  useEffect(() => {
+    AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -27,140 +24,186 @@ function App() {
     toggleSwitch(newTheme);
   };
 
-  // Fetch language percentages from GitHub
-  const fetchLanguageData = async () => {
-    const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; 
-    const GITHUB_USERNAME = data.github_name; 
-
-    if (GITHUB_USERNAME !== "" || GITHUB_USERNAME !== null) {
-      const reposUrl = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
-      const headers = { Authorization: `token ${GITHUB_TOKEN}` };
-    
-      try {
-        const reposResponse = await fetch(reposUrl, { headers });
-        const repos = await reposResponse.json();
-        
-        const languageCounts = {};
-    
-        for (const repo of repos) {
-          const langUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/languages`;
-          const langResponse = await fetch(langUrl, { headers });
-          const languages = await langResponse.json();
-    
-          for (const [lang, bytes] of Object.entries(languages)) {
-            if (!IGNORE_LANGUAGES.includes(lang)) {
-              languageCounts[lang] = (languageCounts[lang] || 0) + bytes;
-            }
-          }
-        }
-    
-        const totalBytes = Object.values(languageCounts).reduce((a, b) => a + b, 0);
-        
-        const pieChartData = Object.entries(languageCounts).map(([lang, count], index) => ({
-          id: index, 
-          value: ((count / totalBytes) * 100).toFixed(2), 
-          label: lang 
-        }));
-    
-        setLanguageData(pieChartData);
-      } catch (error) {
-        console.error("Error fetching language data:", error);
-      }
+  const handleDownloadCV = async () => {
+    try {
+      await getgit('Duarte0903', 'resume', 'template/resume_pt.pdf');
+    } catch (error) {
+      console.error('Error downloading CV:', error);
     }
   };
-
-  useEffect(() => {
-    fetchLanguageData();
-  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className='App' id={theme}>
         <Navbar className="navbar" toggleTheme={toggleTheme} />
-        
-        <div className='hello-card-container'>
-          <div className='hello-card'>
-            <div className='profile-pic-container'>
-              <img src="profile_pic.png" className='profile-pic' />
+
+        {/* ===== HERO ===== */}
+        <section className='hero'>
+          <div className='hero-inner'>
+            <div className='hero-text' data-aos='fade-up'>
+              <span className='hero-eyebrow'>{data.hero.greeting}</span>
+              <h1 className='hero-name'>
+                <span className='gradient-text'>{data.hero.name}</span>
+              </h1>
+              <h2 className='hero-role'>{data.hero.role}</h2>
+              <p className='hero-tagline'>{data.hero.tagline}</p>
+
+              <div className='hero-cta'>
+                <a className='btn btn-primary' href='#projects'>View Projects</a>
+                <button className='btn btn-ghost' onClick={handleDownloadCV}>Download CV</button>
+
+                <div className='hero-socials'>
+                  <a className='social-link' href={data.github_profile} target='_blank' rel='noreferrer' aria-label='GitHub'>
+                    <img src='github.png' alt='' />
+                  </a>
+                  <a className='social-link' href={data.linkedin} target='_blank' rel='noreferrer' aria-label='LinkedIn'>
+                    <img src='linkedin.png' alt='' />
+                  </a>
+                </div>
+              </div>
             </div>
 
-            <div className='about-me-container'>
-              <h2>Hello there 👋</h2>
-              <p className='about-me-text'>{data['hello-card'].text}</p>
+            <div className='hero-portrait' data-aos='fade-left' data-aos-delay='150'>
+              <div className='portrait-ring'>
+                <img src='profile_pic.jpg' alt='Duarte Leitão' />
+              </div>
             </div>
           </div>
-        </div>
 
-        {data.education &&
-        <div className='education-container'>
-          <h1>Education</h1>
-          <div className='education-cards-container'>
-            {data.education.map((education, index) => (
-              <div className='education-card' key={index}>
-                <h2>{education.title}</h2>
-                <p className='edu-institution'>{education.school}</p>
-                <p>{education.date}</p>
+          <a className='scroll-hint' href='#about'>scroll ↓</a>
+        </section>
+
+        {/* ===== ABOUT ===== */}
+        <section className='section' id='about'>
+          <div className='section-head' data-aos='fade-up'>
+            <span className='section-kicker'>01 — About</span>
+            <h2 className='section-title'>Who I am</h2>
+          </div>
+
+          <div className='about-inner'>
+            <p className='about-text' data-aos='fade-up'>{data['hello-card'].text}</p>
+
+            <div className='facts-row'>
+              {data.facts.map((fact, index) => (
+                <div className='fact-card' key={index} data-aos='fade-up' data-aos-delay={index * 100}>
+                  <div className='fact-label'>{fact.label}</div>
+                  <div className='fact-value'>{fact.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== SKILLS ===== */}
+        <section className='section' id='skills'>
+          <div className='section-head' data-aos='fade-up'>
+            <span className='section-kicker'>02 — Skills</span>
+            <h2 className='section-title'>What I work with</h2>
+          </div>
+
+          <div className='skills-groups'>
+            {data.skills.map((group, index) => (
+              <div className='skill-group' key={index} data-aos='fade-up' data-aos-delay={index * 100}>
+                <div className='skill-group-label'>{group.category}</div>
+                <div className='skill-pills'>
+                  {group.items.map((item, i) => (
+                    <span className='skill-pill' key={i}>{item}</span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
-        </div>}
+        </section>
 
-        {(data.github !== "" || data.github !== null) &&
-          <div className='languages-container'>
-          <h1>Top Languages</h1>
-
-          <div className='pie-chart-container'>
-            {languageData ? (
-              <PieChart
-                className="pie-chart" 
-                margin={{ bottom: 100, right: 0, left: 0, top: 0 }}
-                series={[
-                  {
-                    data: languageData,
-                    highlightScope: { fade: 'global', highlight: 'item' },
-                    faded: { innerRadius: 30, additionalRadius: -30, color: 'grey' },
-                    label: {
-                      position: 'outside',
-                      color: 'grey',
-                      fontSize: '12px',
-                    }
-                  },
-                ]}
-                height={400}
-                width={600}
-                slotProps={{
-                  legend: {
-                    itemMarkWidth: 10,
-                    direction: 'row',
-                    position: {
-                      vertical: 'bottom',
-                      horizontal: 'middle',
-                    },
-                    labelStyle: {
-                      fill: fillColor,
-                    }
-                  }
-                }}
-              />
-            ) : (
-              <div className="spinner"></div>
-            )}
+        {/* ===== EXPERIENCE ===== */}
+        {data.experience &&
+        <section className='section' id='experience'>
+          <div className='section-head' data-aos='fade-up'>
+            <span className='section-kicker'>03 — Experience</span>
+            <h2 className='section-title'>Where I've worked</h2>
           </div>
-        </div>}
 
-        <div className='top-projects-container'>
-          <h1>Top Projects</h1>
-          <div className='project-cards-container'>
-            {data.projects.map((project, index) => (
-              <ProjectCard 
-                key={index}
-                project_name={project.title}
-                repo_link={project.link}
-                project_description={project.description}
-              />
+          <div className='timeline'>
+            {data.experience.map((job, index) => (
+              <div className='timeline-item' key={index} data-aos='fade-up' data-aos-delay={index * 100}>
+                <div className='timeline-card'>
+                  <div className='timeline-top'>
+                    <h3 className='timeline-role'>{job.role}</h3>
+                    {job.type && <span className='timeline-type'>{job.type}</span>}
+                  </div>
+
+                  <div className='timeline-meta'>
+                    {job.brandColor &&
+                      <span className='timeline-mark' style={{ background: job.brandColor }} />}
+                    <span className='timeline-company'>{job.company}</span>
+                    <span className='timeline-dot'>·</span>
+                    <span className='timeline-date'>{job.date}</span>
+                    {job.location &&
+                      <>
+                        <span className='timeline-dot'>·</span>
+                        <span className='timeline-location'>{job.location}</span>
+                      </>}
+                  </div>
+
+                  <p className='timeline-desc'>{job.description}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
+        </section>}
+
+        {/* ===== EDUCATION ===== */}
+        {data.education &&
+        <section className='section' id='education'>
+          <div className='section-head' data-aos='fade-up'>
+            <span className='section-kicker'>04 — Education</span>
+            <h2 className='section-title'>Education</h2>
+          </div>
+
+          <div className='education-cards-container'>
+            {data.education.map((education, index) => (
+              <div className='education-card' key={index} data-aos='fade-up' data-aos-delay={index * 100}>
+                <h3>{education.title}</h3>
+                <p className='edu-institution'>{education.school}</p>
+                <p className='edu-date'>{education.date}</p>
+              </div>
+            ))}
+          </div>
+        </section>}
+
+        {/* ===== PROJECTS ===== */}
+        <section className='section' id='projects'>
+          <div className='section-head' data-aos='fade-up'>
+            <span className='section-kicker'>05 — Work</span>
+            <h2 className='section-title'>Top Projects</h2>
+          </div>
+
+          <div className='project-cards-container'>
+            {data.projects.map((project, index) => (
+              <div key={index} data-aos='fade-up' data-aos-delay={(index % 3) * 100}>
+                <ProjectCard
+                  project_name={project.title}
+                  repo_link={project.link}
+                  project_description={project.description}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===== FOOTER ===== */}
+        <footer className='footer'>
+          <div className='footer-name gradient-text'>{data.hero.name}</div>
+          <div className='footer-socials'>
+            <a className='social-link' href={data.github_profile} target='_blank' rel='noreferrer' aria-label='GitHub'>
+              <img src='github.png' alt='' />
+            </a>
+            <a className='social-link' href={data.linkedin} target='_blank' rel='noreferrer' aria-label='LinkedIn'>
+              <img src='linkedin.png' alt='' />
+            </a>
+          </div>
+          <p className='footer-copy'>© {new Date().getFullYear()} Duarte Leitão · Built with React &amp; Vite</p>
+        </footer>
       </div>
     </ThemeContext.Provider>
   );
