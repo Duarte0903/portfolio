@@ -4,25 +4,14 @@ import '../src/style/index.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProjectCard from './components/project_card/project_card.jsx';
-import { createContext, useState, useEffect } from 'react';
-import { toggleSwitch } from '../src/javascript/toggleSwitch.js';
+import { useEffect } from 'react';
 import { getgit } from './javascript/download_cv.js';
 import data from './data.json';
 
-export const ThemeContext = createContext(null);
-
 function App() {
-  const [theme, setTheme] = useState('dark');
-
   useEffect(() => {
     AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    toggleSwitch(newTheme);
-  };
 
   const handleDownloadCV = async () => {
     try {
@@ -33,9 +22,17 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className='App' id={theme}>
-        <Navbar className="navbar" toggleTheme={toggleTheme} />
+      <div className='App'>
+        {/* Liquid Glass refraction filter (referenced by backdrop-filter) */}
+        <svg className='lg-filter' aria-hidden='true' width='0' height='0'>
+          <filter id='lg-distortion' x='-20%' y='-20%' width='140%' height='140%' colorInterpolationFilters='sRGB'>
+            <feTurbulence type='fractalNoise' baseFrequency='0.004 0.004' numOctaves='2' seed='7' result='noise' />
+            <feGaussianBlur in='noise' stdDeviation='2.6' result='blur' />
+            <feDisplacementMap in='SourceGraphic' in2='blur' scale='16' xChannelSelector='R' yChannelSelector='G' />
+          </filter>
+        </svg>
+
+        <Navbar />
 
         {/* ===== HERO ===== */}
         <section className='hero'>
@@ -65,7 +62,7 @@ function App() {
 
             <div className='hero-portrait' data-aos='fade-left' data-aos-delay='150'>
               <div className='portrait-ring'>
-                <img src='profile_pic.jpg' alt='Duarte Leitão' />
+                <img src='profile_pic_web.jpg' alt='Duarte Leitão' />
               </div>
             </div>
           </div>
@@ -180,7 +177,7 @@ function App() {
 
           <div className='project-cards-container'>
             {data.projects.map((project, index) => (
-              <div key={index} data-aos='fade-up' data-aos-delay={(index % 3) * 100}>
+              <div className='project-cell' key={index} data-aos='fade-up' data-aos-delay={(index % 3) * 100}>
                 <ProjectCard
                   project_name={project.title}
                   repo_link={project.link}
@@ -205,7 +202,6 @@ function App() {
           <p className='footer-copy'>© {new Date().getFullYear()} Duarte Leitão · Built with React &amp; Vite</p>
         </footer>
       </div>
-    </ThemeContext.Provider>
   );
 }
 

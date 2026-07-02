@@ -10,7 +10,7 @@ const NAV_LINKS = [
     { label: 'Projects', href: '#projects' },
 ];
 
-function Navbar({ toggleTheme }) {
+function Navbar() {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -70,12 +70,6 @@ function Navbar({ toggleTheme }) {
                 </ul>
 
                 <div className='nav-actions'>
-                    <div className='dark-mode-switch' onClick={toggleTheme}>
-                        <img src='sun.png' className='switch-icon sun'/>
-                        <div className='switch-indicator' id='switch'/>
-                        <img src='moon.png' className='switch-icon moon'/>
-                    </div>
-
                     <a className='nav-action' href='https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/' target='_blank' rel='noreferrer' aria-label='LinkedIn'>
                         <img src='linkedin.png' className='nav-icon' alt='' />
                     </a>

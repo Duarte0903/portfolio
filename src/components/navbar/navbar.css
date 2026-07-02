@@ -9,6 +9,7 @@
 }
 
 header.navbar {
+    position: relative;
     width: min(94%, 1120px);
     min-height: 62px;
     padding: 0 26px;
@@ -16,12 +17,34 @@ header.navbar {
     justify-content: space-between;
     align-items: center;
     border-radius: var(--radius-pill);
-    background: var(--nav-bg);
-    border: 1px solid var(--border);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.5);
+    background:
+        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 52%) padding-box,
+        var(--nav-bg) padding-box,
+        var(--glass-rim) border-box;
+    border: 1px solid transparent;
+    -webkit-backdrop-filter: blur(16px) var(--glass-fx);
+    backdrop-filter: blur(16px) var(--glass-fx);
+    box-shadow:
+        0 12px 34px -14px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 -10px 24px -14px rgba(255, 255, 255, 0.08);
     transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Signature refraction: bends the page behind the bar at its edges.
+   Additive-only — if a browser ignores url() in backdrop-filter the whole
+   declaration is dropped and the frosted glass above still stands. */
+header.navbar::before {
+    content: "";
+    position: absolute;
+    /* Held a few px inside the border so the displaced pixels never reach
+       the rounded edge — keeps the pill outline crisp. */
+    inset: 5px;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    -webkit-backdrop-filter: url(#lg-distortion);
+    backdrop-filter: url(#lg-distortion);
 }
 
 .nav-branding {
@@ -102,49 +125,6 @@ header.navbar {
     align-items: center;
 }
 
-.dark-mode-switch {
-    cursor: pointer;
-    background: var(--chip-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
-    height: 30px;
-    width: 58px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    transition: border-color 0.25s ease;
-    flex-shrink: 0;
-}
-
-.dark-mode-switch:hover {
-    border-color: var(--border-hover);
-}
-
-.switch-indicator {
-    background: var(--accent-grad);
-    border-radius: 50%;
-    height: 22px;
-    width: 22px;
-    margin-left: var(--margin-left);
-    transition: margin-left 0.2s var(--ease);
-}
-
-.switch-icon {
-    height: auto;
-    width: 14px;
-}
-
-.moon {
-    margin-left: 10px;
-    display: var(--moon-display);
-    opacity: 0.6;
-}
-
-.sun {
-    margin-left: 6px;
-    display: var(--sun-display);
-}
-
 .hamburger {
     display: none;
     cursor: pointer;
@@ -166,8 +146,14 @@ header.navbar {
     height: 32px;
     padding: 5px;
     border-radius: 50%;
-    background: var(--chip-bg);
-    border: 1px solid var(--border);
+    background:
+        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 60%) padding-box,
+        var(--glass-fill) padding-box,
+        var(--glass-rim) border-box;
+    border: 1px solid transparent;
+    -webkit-backdrop-filter: blur(10px) var(--glass-fx);
+    backdrop-filter: blur(10px) var(--glass-fx);
+    box-shadow: inset 0 1px 0 var(--glass-hi);
     cursor: pointer;
     box-sizing: border-box;
     transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);

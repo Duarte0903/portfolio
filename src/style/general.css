@@ -21,9 +21,6 @@
     --radius-pill: 999px;
     --maxw: 1120px;
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-
-    /* used by the theme toggle indicator */
-    --margin-left: 2px;
 }
 
 html {
@@ -66,9 +63,9 @@ h1, h2, h3, h4 {
     letter-spacing: -0.01em;
 }
 
-/* ---------- Theme tokens ---------- */
+/* ---------- Theme tokens (dark only) ---------- */
 
-#dark {
+:root {
     --bg: #0a0a12;
     --surface: rgba(255, 255, 255, 0.035);
     --surface-strong: rgba(255, 255, 255, 0.06);
@@ -77,31 +74,33 @@ h1, h2, h3, h4 {
     --text: #f3f4f8;
     --text-dim: #a6a7b8;
     --shadow: 0 24px 60px -22px rgba(0, 0, 0, 0.75);
-    --nav-bg: rgba(12, 12, 20, 0.55);
+    --nav-bg: rgba(255, 255, 255, 0.22);
     --chip-bg: rgba(255, 255, 255, 0.04);
 
-    background-color: var(--bg);
+    /* Liquid Glass */
+    --glass-fill: rgba(255, 255, 255, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-hi: rgba(255, 255, 255, 0.18);
+    --glass-sheen: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 14px 44px -10px rgba(0, 0, 0, 0.6);
+    --glass-blur: 26px;
+    /* Backdrop treatment — brightness lifts the dark page behind the glass so
+       it looks frosted/lit instead of dim. */
+    --glass-fx: saturate(180%) brightness(1.6);
+    /* Refractive rim: an even light hairline all around, only slightly
+       brighter up top so it reads as one clean edge, not a glowing band. */
+    --glass-rim: linear-gradient(155deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.18) 40%,
+        rgba(255, 255, 255, 0.16) 68%,
+        rgba(255, 255, 255, 0.24) 100%);
+
     color: var(--text);
-    --moon-display: block;
-    --sun-display: none;
 }
 
-#light {
-    --bg: #f6f7fc;
-    --surface: rgba(255, 255, 255, 0.85);
-    --surface-strong: #ffffff;
-    --border: rgba(17, 18, 40, 0.09);
-    --border-hover: rgba(124, 58, 237, 0.45);
-    --text: #101127;
-    --text-dim: #55566d;
-    --shadow: 0 24px 60px -26px rgba(30, 30, 70, 0.28);
-    --nav-bg: rgba(255, 255, 255, 0.6);
-    --chip-bg: rgba(17, 18, 40, 0.035);
-
+body {
     background-color: var(--bg);
     color: var(--text);
-    --sun-display: block;
-    --moon-display: none;
 }
 
 /* ---------- App shell + ambient background ---------- */
@@ -111,6 +110,13 @@ h1, h2, h3, h4 {
     min-height: 100vh;
     isolation: isolate;
     padding-bottom: 40px;
+}
+
+.lg-filter {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
 }
 
 .App::before {
@@ -123,10 +129,6 @@ h1, h2, h3, h4 {
         radial-gradient(42% 46% at 14% 8%, rgba(124, 58, 237, 0.20), transparent 62%),
         radial-gradient(40% 44% at 88% 16%, rgba(34, 211, 238, 0.16), transparent 60%),
         radial-gradient(52% 48% at 52% 108%, rgba(124, 58, 237, 0.12), transparent 60%);
-}
-
-#light .App::before {
-    opacity: 0.7;
 }
 
 /* ---------- Layout helpers ---------- */
@@ -179,21 +181,30 @@ h1, h2, h3, h4 {
     color: transparent;
 }
 
-/* ---------- Surfaces (cards) ---------- */
-
+/* ---------- Liquid Glass ---------- */
+/* Reusable glass material: translucent fill + blur & saturation boost, a
+   diagonal specular sheen baked into the background, a bright edge, and an
+   inner top highlight for the "wet" look. */
+.glass,
 .surface {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background:
+        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 44%) padding-box,
+        var(--glass-fill) padding-box,
+        var(--glass-rim) border-box;
+    border: 1px solid transparent;
     border-radius: var(--radius);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
+    backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
+    box-shadow:
+        var(--glass-shadow),
+        inset 0 1px 0 var(--glass-hi),
+        inset 0 0 22px rgba(255, 255, 255, 0.03);
     transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 
 .surface:hover {
     transform: translateY(-6px);
     border-color: var(--border-hover);
-    box-shadow: var(--shadow);
 }
 
 /* ---------- Buttons ---------- */
@@ -224,26 +235,21 @@ h1, h2, h3, h4 {
 }
 
 .btn-ghost {
-    background: var(--surface);
     color: var(--text);
-    border-color: var(--border);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background:
+        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 46%) padding-box,
+        var(--glass-fill) padding-box,
+        var(--glass-rim) border-box;
+    border-color: transparent;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
+    backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
+    box-shadow: inset 0 1px 0 var(--glass-hi);
 }
 
 .btn-ghost:hover {
     transform: translateY(-3px);
     border-color: var(--border-hover);
-}
-
-/* ---------- Icon theming ---------- */
-/* GitHub / LinkedIn / CV glyphs are white PNGs — they read fine on the dark
-   theme, but need to be darkened on the light theme to stay visible. Scoped to
-   the navbar and social buttons so the white icon on the project-card gradient
-   circle (.card-icon) is left untouched. */
-#light .nav-icon,
-#light .social-link img {
-    filter: brightness(0) opacity(0.8);
+    box-shadow: inset 0 1px 0 var(--glass-hi), 0 10px 30px -12px rgba(0, 0, 0, 0.5);
 }
 
 /* ---------- Scrollbar ---------- */
