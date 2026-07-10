@@ -1,6 +1,11 @@
+/* ============================================================
+   Design tokens — refined dark minimal
+   ============================================================ */
+
 :root {
     --font-body: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
     --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
 
     line-height: 1.6;
     font-weight: 400;
@@ -10,21 +15,44 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 
-    /* Brand */
-    --accent-1: #7c3aed;
-    --accent-2: #22d3ee;
-    --accent-grad: linear-gradient(135deg, #7c3aed 0%, #2dd4ff 100%);
+    /* Canvas */
+    --bg: #060609;
+    --bg-raise: #0c0c13;
 
-    /* Shape */
-    --radius: 18px;
-    --radius-lg: 26px;
+    /* Surfaces & hairlines */
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-2: rgba(255, 255, 255, 0.055);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+
+    /* Text */
+    --text: #f0f0f5;
+    --text-dim: #a2a3b0;
+    --text-faint: #64656f;
+
+    /* Accent */
+    --accent: #a78bfa;
+    --accent-2: #67e8f9;
+    --accent-grad: linear-gradient(115deg, #a78bfa 0%, #67e8f9 100%);
+    --glow-violet: rgba(124, 58, 237, 0.35);
+
+    /* Shape & motion */
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 24px;
     --radius-pill: 999px;
-    --maxw: 1120px;
+    --maxw: 1080px;
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    color: var(--text);
 }
 
+/* ============================================================
+   Base
+   ============================================================ */
+
 html {
-    background-color: #0a0a12;
+    background-color: var(--bg);
 }
 
 html, body {
@@ -40,10 +68,13 @@ html, body {
 
 body {
     font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 a {
     all: unset;
+    cursor: pointer;
 }
 
 li {
@@ -60,117 +91,99 @@ h1, h2, h3, h4 {
     font-family: var(--font-display);
     margin: 0;
     line-height: 1.15;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
 }
 
-/* ---------- Theme tokens (dark only) ---------- */
-
-:root {
-    --bg: #0a0a12;
-    --surface: rgba(255, 255, 255, 0.035);
-    --surface-strong: rgba(255, 255, 255, 0.06);
-    --border: rgba(255, 255, 255, 0.09);
-    --border-hover: rgba(255, 255, 255, 0.22);
-    --text: #f3f4f8;
-    --text-dim: #a6a7b8;
-    --shadow: 0 24px 60px -22px rgba(0, 0, 0, 0.75);
-    --nav-bg: rgba(255, 255, 255, 0.22);
-    --chip-bg: rgba(255, 255, 255, 0.04);
-
-    /* Liquid Glass */
-    --glass-fill: rgba(255, 255, 255, 0.3);
-    --glass-border: rgba(255, 255, 255, 0.14);
-    --glass-hi: rgba(255, 255, 255, 0.18);
-    --glass-sheen: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 14px 44px -10px rgba(0, 0, 0, 0.6);
-    --glass-blur: 26px;
-    /* Backdrop treatment — brightness lifts the dark page behind the glass so
-       it looks frosted/lit instead of dim. */
-    --glass-fx: saturate(180%) brightness(1.6);
-    /* Refractive rim: an even light hairline all around, only slightly
-       brighter up top so it reads as one clean edge, not a glowing band. */
-    --glass-rim: linear-gradient(155deg,
-        rgba(255, 255, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0.18) 40%,
-        rgba(255, 255, 255, 0.16) 68%,
-        rgba(255, 255, 255, 0.24) 100%);
-
+::selection {
+    background: rgba(167, 139, 250, 0.32);
     color: var(--text);
 }
 
-body {
-    background-color: var(--bg);
-    color: var(--text);
+:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
-/* ---------- App shell + ambient background ---------- */
+/* ============================================================
+   App shell + ambient background
+   ============================================================ */
 
 .App {
     position: relative;
     min-height: 100vh;
     isolation: isolate;
-    padding-bottom: 40px;
+    padding-bottom: 32px;
 }
 
-.lg-filter {
-    position: absolute;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-}
-
+/* Aurora glow — fixed, very low intensity */
 .App::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(46% 40% at 16% 2%, rgba(124, 58, 237, 0.16), transparent 64%),
+        radial-gradient(38% 34% at 84% 6%, rgba(34, 211, 238, 0.10), transparent 60%),
+        radial-gradient(60% 46% at 50% 115%, rgba(124, 58, 237, 0.07), transparent 62%);
+}
+
+/* Line grid, masked so it fades out below the hero */
+.App::after {
     content: "";
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background:
-        radial-gradient(42% 46% at 14% 8%, rgba(124, 58, 237, 0.20), transparent 62%),
-        radial-gradient(40% 44% at 88% 16%, rgba(34, 211, 238, 0.16), transparent 60%),
-        radial-gradient(52% 48% at 52% 108%, rgba(124, 58, 237, 0.12), transparent 60%);
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 100% 62% at 50% 0%, black 20%, transparent 72%);
+    mask-image: radial-gradient(ellipse 100% 62% at 50% 0%, black 20%, transparent 72%);
 }
 
-/* ---------- Layout helpers ---------- */
+/* ============================================================
+   Layout helpers
+   ============================================================ */
 
 .section {
     max-width: var(--maxw);
     margin: 0 auto;
-    padding: 84px 24px;
-    scroll-margin-top: 70px;
+    padding: 96px 24px;
+    scroll-margin-top: 76px;
 }
 
 .section-head {
-    text-align: center;
-    margin-bottom: 48px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 52px;
 }
 
 .section-kicker {
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent-2);
+    color: var(--accent);
 }
 
 .section-title {
-    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
     font-weight: 700;
 }
 
-.section-title::after {
+/* Fading hairline under the header */
+.section-head::after {
     content: "";
-    display: block;
-    width: 56px;
-    height: 3px;
-    margin: 16px auto 0;
-    border-radius: 999px;
-    background: var(--accent-grad);
+    width: 100%;
+    height: 1px;
+    margin-top: 12px;
+    background: linear-gradient(90deg, var(--border-strong), transparent 70%);
 }
 
 .gradient-text {
@@ -181,78 +194,72 @@ body {
     color: transparent;
 }
 
-/* ---------- Liquid Glass ---------- */
-/* Reusable glass material: translucent fill + blur & saturation boost, a
-   diagonal specular sheen baked into the background, a bright edge, and an
-   inner top highlight for the "wet" look. */
-.glass,
-.surface {
-    background:
-        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 44%) padding-box,
-        var(--glass-fill) padding-box,
-        var(--glass-rim) border-box;
-    border: 1px solid transparent;
+/* ============================================================
+   Panel — the one card material used everywhere
+   ============================================================ */
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
-    backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
-    box-shadow:
-        var(--glass-shadow),
-        inset 0 1px 0 var(--glass-hi),
-        inset 0 0 22px rgba(255, 255, 255, 0.03);
-    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    transition:
+        transform 0.3s var(--ease),
+        border-color 0.3s var(--ease),
+        background-color 0.3s var(--ease);
 }
 
-.surface:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-hover);
+.panel:hover {
+    border-color: var(--border-strong);
 }
 
-/* ---------- Buttons ---------- */
+/* ============================================================
+   Buttons
+   ============================================================ */
 
 .btn {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.98rem;
-    padding: 13px 26px;
+    font-size: 0.95rem;
+    padding: 12px 24px;
     border-radius: var(--radius-pill);
     cursor: pointer;
     border: 1px solid transparent;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
     display: inline-flex;
     align-items: center;
     gap: 9px;
+    transition:
+        transform 0.25s var(--ease),
+        box-shadow 0.25s var(--ease),
+        border-color 0.25s var(--ease),
+        background-color 0.25s var(--ease);
 }
 
 .btn-primary {
-    background: var(--accent-grad);
-    color: #ffffff;
-    box-shadow: 0 12px 30px -12px rgba(124, 58, 237, 0.7);
+    background: #ffffff;
+    color: #0a0a0f;
+    box-shadow: 0 10px 32px -14px rgba(255, 255, 255, 0.45);
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 40px -12px rgba(124, 58, 237, 0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -14px rgba(255, 255, 255, 0.55);
 }
 
 .btn-ghost {
     color: var(--text);
-    background:
-        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 46%) padding-box,
-        var(--glass-fill) padding-box,
-        var(--glass-rim) border-box;
-    border-color: transparent;
-    -webkit-backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
-    backdrop-filter: blur(var(--glass-blur)) var(--glass-fx);
-    box-shadow: inset 0 1px 0 var(--glass-hi);
+    background: transparent;
+    border-color: var(--border-strong);
 }
 
 .btn-ghost:hover {
-    transform: translateY(-3px);
-    border-color: var(--border-hover);
-    box-shadow: inset 0 1px 0 var(--glass-hi), 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: var(--surface);
 }
 
-/* ---------- Scrollbar ---------- */
+/* ============================================================
+   Scrollbar & motion
+   ============================================================ */
 
 *::-webkit-scrollbar {
     width: 10px;
@@ -263,6 +270,25 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background: var(--accent-grad);
+    background: rgba(255, 255, 255, 0.14);
     border-radius: 20px;
+    border: 2px solid var(--bg);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html, body {
+        scroll-behavior: auto;
+    }
 }

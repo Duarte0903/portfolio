@@ -12,7 +12,7 @@
 
     "facts": [
         { "label": "Based in", "value": "Braga, Portugal" },
-        { "label": "Focus", "value": "Full-stack & Systems" },
+        { "label": "Focus", "value": "Full-stack" },
         { "label": "Currently", "value": "MSc @ U. Minho" }
     ],
 
@@ -54,6 +54,16 @@
             "brandColor": "#86BC25",
             "type": "Internship",
             "date": "2025 - 2026",
+            "location": "Braga, Portugal",
+            "description": "Development in Guidewire Claimcenter and Policycenter. Introduction of new LoBs and insurance products."
+        },
+        
+        {
+            "role": "Tech Analyst",
+            "company": "Deloitte",
+            "brandColor": "#86BC25",
+            "type": "Full-time",
+            "date": "2026 - Present",
             "location": "Braga, Portugal",
             "description": "Development in Guidewire Claimcenter and Policycenter. Introduction of new LoBs and insurance products."
         }

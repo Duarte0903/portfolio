@@ -1,5 +1,6 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { getgit } from '../../javascript/download_cv.js';
+import { GitHubIcon, LinkedInIcon, DownloadIcon } from '../icons.jsx';
 import './navbar.css'
 
 const NAV_LINKS = [
@@ -71,15 +72,15 @@ function Navbar() {
 
                 <div className='nav-actions'>
                     <a className='nav-action' href='https://www.linkedin.com/in/duarte-leit%C3%A3o-7b0a6624b/' target='_blank' rel='noreferrer' aria-label='LinkedIn'>
-                        <img src='linkedin.png' className='nav-icon' alt='' />
+                        <LinkedInIcon size={16} />
                     </a>
 
                     <a className='nav-action' href='https://github.com/Duarte0903' target='_blank' rel='noreferrer' aria-label='GitHub'>
-                        <img src='github.png' className='nav-icon' alt='' />
+                        <GitHubIcon size={16} />
                     </a>
 
                     <button className='nav-action' onClick={handleDownload} aria-label='Download CV'>
-                        <img className='nav-icon' src='cv.png' alt='' />
+                        <DownloadIcon size={16} />
                     </button>
                 </div>
             </nav>

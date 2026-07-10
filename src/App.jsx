@@ -4,6 +4,7 @@ import '../src/style/index.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProjectCard from './components/project_card/project_card.jsx';
+import { GitHubIcon, LinkedInIcon, ArrowUpIcon } from './components/icons.jsx';
 import { useEffect } from 'react';
 import { getgit } from './javascript/download_cv.js';
 import data from './data.json';
@@ -23,21 +24,16 @@ function App() {
 
   return (
       <div className='App'>
-        {/* Liquid Glass refraction filter (referenced by backdrop-filter) */}
-        <svg className='lg-filter' aria-hidden='true' width='0' height='0'>
-          <filter id='lg-distortion' x='-20%' y='-20%' width='140%' height='140%' colorInterpolationFilters='sRGB'>
-            <feTurbulence type='fractalNoise' baseFrequency='0.004 0.004' numOctaves='2' seed='7' result='noise' />
-            <feGaussianBlur in='noise' stdDeviation='2.6' result='blur' />
-            <feDisplacementMap in='SourceGraphic' in2='blur' scale='16' xChannelSelector='R' yChannelSelector='G' />
-          </filter>
-        </svg>
-
         <Navbar />
 
         {/* ===== HERO ===== */}
         <section className='hero'>
           <div className='hero-inner'>
             <div className='hero-text' data-aos='fade-up'>
+              <span className='hero-status'>
+                <span className='status-dot' />
+                Tech Analyst at Deloitte
+              </span>
               <span className='hero-eyebrow'>{data.hero.greeting}</span>
               <h1 className='hero-name'>
                 <span className='gradient-text'>{data.hero.name}</span>
@@ -51,23 +47,23 @@ function App() {
 
                 <div className='hero-socials'>
                   <a className='social-link' href={data.github_profile} target='_blank' rel='noreferrer' aria-label='GitHub'>
-                    <img src='github.png' alt='' />
+                    <GitHubIcon size={19} />
                   </a>
                   <a className='social-link' href={data.linkedin} target='_blank' rel='noreferrer' aria-label='LinkedIn'>
-                    <img src='linkedin.png' alt='' />
+                    <LinkedInIcon size={19} />
                   </a>
                 </div>
               </div>
             </div>
 
             <div className='hero-portrait' data-aos='fade-left' data-aos-delay='150'>
-              <div className='portrait-ring'>
+              <div className='portrait-frame'>
                 <img src='profile_pic_web.jpg' alt='Duarte Leitão' />
               </div>
             </div>
           </div>
 
-          <a className='scroll-hint' href='#about'>scroll ↓</a>
+          <a className='scroll-hint' href='#about'>scroll</a>
         </section>
 
         {/* ===== ABOUT ===== */}
@@ -182,6 +178,7 @@ function App() {
                   project_name={project.title}
                   repo_link={project.link}
                   project_description={project.description}
+                  index={index}
                 />
               </div>
             ))}
@@ -190,16 +187,23 @@ function App() {
 
         {/* ===== FOOTER ===== */}
         <footer className='footer'>
-          <div className='footer-name gradient-text'>{data.hero.name}</div>
-          <div className='footer-socials'>
+          <div className='footer-left'>
+            <div className='footer-name gradient-text'>{data.hero.name}</div>
+            <p className='footer-copy'>© {new Date().getFullYear()} · Built with React &amp; Vite</p>
+          </div>
+
+          <div className='footer-right'>
+            <a className='footer-top' href='#' onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+              <ArrowUpIcon size={13} />
+              Top
+            </a>
             <a className='social-link' href={data.github_profile} target='_blank' rel='noreferrer' aria-label='GitHub'>
-              <img src='github.png' alt='' />
+              <GitHubIcon size={18} />
             </a>
             <a className='social-link' href={data.linkedin} target='_blank' rel='noreferrer' aria-label='LinkedIn'>
-              <img src='linkedin.png' alt='' />
+              <LinkedInIcon size={18} />
             </a>
           </div>
-          <p className='footer-copy'>© {new Date().getFullYear()} Duarte Leitão · Built with React &amp; Vite</p>
         </footer>
       </div>
   );

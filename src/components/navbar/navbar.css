@@ -4,47 +4,25 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 9999999;
-    padding: 16px 0;
+    z-index: 100;
+    padding: 14px 0;
 }
 
 header.navbar {
     position: relative;
-    width: min(94%, 1120px);
-    min-height: 62px;
-    padding: 0 26px;
+    width: min(94%, 1080px);
+    min-height: 56px;
+    padding: 0 10px 0 22px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: var(--radius-pill);
-    background:
-        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 52%) padding-box,
-        var(--nav-bg) padding-box,
-        var(--glass-rim) border-box;
-    border: 1px solid transparent;
-    -webkit-backdrop-filter: blur(16px) var(--glass-fx);
-    backdrop-filter: blur(16px) var(--glass-fx);
-    box-shadow:
-        0 12px 34px -14px rgba(0, 0, 0, 0.55),
-        inset 0 1px 0 var(--glass-hi),
-        inset 0 -10px 24px -14px rgba(255, 255, 255, 0.08);
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-/* Signature refraction: bends the page behind the bar at its edges.
-   Additive-only — if a browser ignores url() in backdrop-filter the whole
-   declaration is dropped and the frosted glass above still stands. */
-header.navbar::before {
-    content: "";
-    position: absolute;
-    /* Held a few px inside the border so the displaced pixels never reach
-       the rounded edge — keeps the pill outline crisp. */
-    inset: 5px;
-    z-index: -1;
-    border-radius: inherit;
-    pointer-events: none;
-    -webkit-backdrop-filter: url(#lg-distortion);
-    backdrop-filter: url(#lg-distortion);
+    background: rgba(8, 8, 13, 0.55);
+    border: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+    transition: border-color 0.3s ease;
 }
 
 .nav-branding {
@@ -52,39 +30,40 @@ header.navbar::before {
 }
 
 .logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 500;
     letter-spacing: -0.02em;
-    background: var(--accent-grad);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    position: relative;
-    z-index: 99999992;
+    color: var(--text);
     white-space: nowrap;
+    transition: color 0.25s var(--ease);
+}
+
+.logo:hover {
+    color: var(--accent-2);
 }
 
 /* ---- desktop: links + actions grouped on the right ---- */
 .nav-collapse {
     display: flex;
     align-items: center;
-    gap: 34px;
+    gap: 28px;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 26px;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
     position: relative;
     display: inline-block;
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-weight: 500;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     color: var(--text-dim);
     cursor: pointer;
     transition: color 0.25s var(--ease);
@@ -96,7 +75,7 @@ header.navbar::before {
     left: 0;
     bottom: -5px;
     width: 0;
-    height: 2px;
+    height: 1.5px;
     border-radius: 2px;
     background: var(--accent-grad);
     transition: width 0.25s var(--ease);
@@ -113,58 +92,54 @@ header.navbar::before {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .nav-action {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    color: var(--text-dim);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition:
+        transform 0.25s var(--ease),
+        border-color 0.25s var(--ease),
+        color 0.25s var(--ease);
+}
+
+.nav-action:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-strong);
+    color: var(--text);
 }
 
 .hamburger {
     display: none;
     cursor: pointer;
-    z-index: 99999992;
+    padding: 8px 12px;
 }
 
 .bar {
     display: block;
-    width: 25px;
+    width: 22px;
     height: 2px;
-    margin: 6px auto;
+    margin: 5px auto;
     border-radius: 2px;
     transition: all 0.3s ease;
     background: var(--text);
 }
 
-.nav-icon {
-    width: 32px;
-    height: 32px;
-    padding: 5px;
-    border-radius: 50%;
-    background:
-        linear-gradient(135deg, var(--glass-sheen) 0%, transparent 60%) padding-box,
-        var(--glass-fill) padding-box,
-        var(--glass-rim) border-box;
-    border: 1px solid transparent;
-    -webkit-backdrop-filter: blur(10px) var(--glass-fx);
-    backdrop-filter: blur(10px) var(--glass-fx);
-    box-shadow: inset 0 1px 0 var(--glass-hi);
-    cursor: pointer;
-    box-sizing: border-box;
-    transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
-}
-
-.nav-action:hover .nav-icon {
-    transform: translateY(-2px);
-    border-color: var(--border-hover);
-}
-
 @media (max-width: 900px) {
+    header.navbar {
+        padding: 0 8px 0 22px;
+    }
+
     .hamburger {
         display: block;
     }
@@ -174,11 +149,11 @@ header.navbar::before {
     }
 
     .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
     }
 
     .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-7px) rotate(-45deg);
     }
 
     .nav-collapse {
@@ -188,19 +163,20 @@ header.navbar::before {
         transform: translateX(-50%);
         flex-direction: column;
         gap: 22px;
-        padding: 28px 40px;
-        background: var(--nav-bg);
+        padding: 30px 40px;
+        /* Near-solid: nested backdrop-filter can't blur the page from inside
+           the navbar's own backdrop root, so translucency just ghosts. */
+        background: #0e0e15;
         border: 1px solid var(--border);
-        -webkit-backdrop-filter: blur(16px);
-        backdrop-filter: blur(16px);
         border-radius: var(--radius-lg);
-        transition: top 0.5s var(--ease), opacity 0.5s ease;
+        box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+        transition: top 0.45s var(--ease), opacity 0.45s ease;
         opacity: 0;
-        width: min(80%, 320px);
+        width: min(84%, 320px);
     }
 
     .nav-collapse.active {
-        top: 90px;
+        top: 84px;
         opacity: 1;
     }
 
@@ -216,12 +192,12 @@ header.navbar::before {
     }
 
     .nav-link {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     .nav-actions {
-        gap: 16px;
-        padding-top: 8px;
+        gap: 14px;
+        padding-top: 18px;
         border-top: 1px solid var(--border);
         width: 100%;
         justify-content: center;

@@ -1,22 +1,31 @@
-import "./project_card.css"
+import { GitHubIcon, ArrowUpRightIcon } from '../icons.jsx';
+import './project_card.css'
 
 function ProjectCard(props) {
-    const {project_name, 
-           project_description, 
-           repo_link} = props;
+    const {project_name,
+           project_description,
+           repo_link,
+           index} = props;
+
+    const number = String((index ?? 0) + 1).padStart(2, '0');
 
     return(
-        <div className='project-card-container'>
+        <a className='project-card-container' href={repo_link} target='_blank' rel='noreferrer' aria-label={`${project_name} on GitHub`}>
             <div className='top-row'>
-                <h4 className='project-name'>{project_name}</h4>
-
-                <a className='link-button' href={repo_link} target="_blank" rel="noreferrer" aria-label={`${project_name} on GitHub`}>
-                    <img src="github.png" className="card-icon" alt="" />
-                </a>
+                <span className='project-number'>{number}</span>
+                <span className='project-arrow'>
+                    <ArrowUpRightIcon size={18} />
+                </span>
             </div>
 
+            <h4 className='project-name'>{project_name}</h4>
             <p className='project-description'>{project_description}</p>
-        </div>
+
+            <span className='project-repo'>
+                <GitHubIcon size={14} />
+                View on GitHub
+            </span>
+        </a>
     );
 }
 
